@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://www.plcopen.org/xml/tc6_0200">
-  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.8.10" creationDateTime="2016-06-16T12:54:51.2002802" />
-  <contentHeader name="Untitled1" modificationDateTime="2016-06-16T12:54:51.2032817">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.10.30" creationDateTime="2018-12-26T13:27:48.5626477" />
+  <contentHeader name="Untitled1" modificationDateTime="2018-12-26T13:27:48.5646476">
     <coordinateInfo>
       <fbd>
         <scaling x="1" y="1" />
@@ -172,6 +172,14 @@
                 <BOOL />
               </type>
             </variable>
+            <variable name="bControlerInputsMustBeReleased">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Are controller inputs holding us in latency lock down?</xhtml>
+              </documentation>
+            </variable>
             <variable name="iUpdateRateMS">
               <type>
                 <DINT />
@@ -256,7 +264,35 @@ IF LatencyWatchdog_TMR.Q THEN
 	bControllerConnected := FALSE;
 END_IF
 
-LatencyWatchdogDeadDuration_TMR(IN:=bWatchdogFailureActive, PT:=DINT_TO_TIME(iADSWatchdogDeadDurationMS));
+
+
+//Force User to release all buttons/sticks on controller before allowing outputs again.
+IF bWatchdogFailureActive AND (Start_Button OR 
+	Back_Button OR 
+	A_Button OR 
+	B_Button OR 
+	X_Button OR 
+	Y_Button OR 
+	LeftShoulder_Button OR 
+	RightShoulder_Button OR 
+	LeftStick_Button OR
+	RightStick_Button OR
+	DPad_Up_Button OR 
+	DPad_Left_Button OR 
+	DPad_Right_Button OR 
+	DPad_Down_Button OR 
+	iLeftStick_X_Axis &lt;&gt; 0 OR
+	iLeftStick_Y_Axis &lt;&gt; 0 OR
+	iRightStick_X_Axis &lt;&gt; 0 OR
+	iRightStick_Y_Axis &lt;&gt; 0 OR
+	iLeftTrigger_Axis &lt;&gt; 0 OR
+	iRightTrigger_Axis &lt;&gt; 0)	THEN
+		bControlerInputsMustBeReleased := TRUE;
+ELSE
+		bControlerInputsMustBeReleased := FALSE;
+END_IF
+
+LatencyWatchdogDeadDuration_TMR(IN:=bWatchdogFailureActive AND NOT bControlerInputsMustBeReleased AND bControllerConnected, PT:=DINT_TO_TIME(iADSWatchdogDeadDurationMS));
 
 // ReEnable after setting duration expires
 IF LatencyWatchdogDeadDuration_TMR.Q THEN
@@ -264,35 +300,36 @@ IF LatencyWatchdogDeadDuration_TMR.Q THEN
 END_IF
 
 // Null the outputs on WD Active so we don't jog into a wall if we lose connection.
-IF bWatchdogFailureActive OR NOT bControllerConnected THEN
-	Start_Button := FALSE; 
-	Back_Button := FALSE; 
-	A_Button := FALSE; 
-	B_Button := FALSE; 
-	X_Button := FALSE; 
-	Y_Button := FALSE; 
-	LeftShoulder_Button := FALSE; 
-	RightShoulder_Button := FALSE; 
-	LeftStick_Button := FALSE; 
-	RightStick_Button := FALSE; 
-	DPad_Up_Button := FALSE; 
-	DPad_Left_Button := FALSE; 
-	DPad_Right_Button := FALSE; 
-	DPad_Down_Button := FALSE; 
-	iLeftStick_X_Axis := 0;
-	iLeftStick_Y_Axis := 0;
-	iRightStick_X_Axis := 0;
-	iRightStick_Y_Axis := 0;
-	iLeftTrigger_Axis := 0;
-	iRightTrigger_Axis := 0;
-	sBatteryInfo		:= 'Unkn';
-	
-	UpdateRate_TMR(IN:=FALSE); // Reset Rate Timer
+IF (bWatchdogFailureActive OR NOT bControllerConnected OR bControlerInputsMustBeReleased) THEN
+		// Null all outputs now.
+		Start_Button := FALSE; 
+		Back_Button := FALSE; 
+		A_Button := FALSE; 
+		B_Button := FALSE; 
+		X_Button := FALSE; 
+		Y_Button := FALSE; 
+		LeftShoulder_Button := FALSE; 
+		RightShoulder_Button := FALSE; 
+		LeftStick_Button := FALSE; 
+		RightStick_Button := FALSE; 
+		DPad_Up_Button := FALSE; 
+		DPad_Left_Button := FALSE; 
+		DPad_Right_Button := FALSE; 
+		DPad_Down_Button := FALSE; 
+		iLeftStick_X_Axis := 0;
+		iLeftStick_Y_Axis := 0;
+		iRightStick_X_Axis := 0;
+		iRightStick_Y_Axis := 0;
+		iLeftTrigger_Axis := 0;
+		iRightTrigger_Axis := 0;
+		sBatteryInfo		:= 'Unkn';
+		
+		UpdateRate_TMR(IN:=FALSE); // Reset Rate Timer
 ELSE
 	; // All is well, VB will update our values constantly.
 END_IF
 
-bIsActive := NOT bWatchdogFailureActive AND bControllerConnected;</xhtml>
+bIsActive := NOT bWatchdogFailureActive AND bControllerConnected AND NOT bControlerInputsMustBeReleased;</xhtml>
           </ST>
         </body>
         <addData>
@@ -332,6 +369,7 @@ VAR
 	iADSWatchdogMS : DINT;    // If Rate is &gt; this, all outputs go to 0.
 	iADSWatchdogDeadDurationMS : DINT;    // If watchdog trips, outputs go to 0 for this long.
 	bWatchdogFailureActive			: BOOL;
+	bControlerInputsMustBeReleased  : BOOL;  // Are controller inputs holding us in latency lock down?
 	// From PLC To VB (Status)
 	iUpdateRateMS : DINT;    // Rate in MS between heartbeat changes detected.
 	

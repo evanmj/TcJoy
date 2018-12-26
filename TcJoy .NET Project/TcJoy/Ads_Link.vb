@@ -57,9 +57,9 @@ Public Class Ads_Link
             Next
         End If
         If Not AdsClient.IsConnected Then
-            MessageBox.Show("Connection with PLC Lost! Restart this HMI when the PLC is back online.")
-            Application.Exit()
-            End
+            'MessageBox.Show("Connection with PLC Lost! Restart this HMI when the PLC is back online.")
+            'Application.Exit()
+            'End
         End If
     End Sub
 

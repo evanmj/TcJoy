@@ -25,12 +25,6 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.TabPage_LiveStatus = New System.Windows.Forms.TabPage()
-        Me.ProgressBar_RightShoulderAnalog = New TcJoy.MyVerticalProgessBar()
-        Me.ProgressBar_LeftShoulderAnalog = New TcJoy.MyVerticalProgessBar()
-        Me.ProgressBar_LeftStickYMinus = New TcJoy.MyVerticalProgessBarMinus()
-        Me.ProgressBar_RightStickYMinus = New TcJoy.MyVerticalProgessBarMinus()
-        Me.ProgressBar_RightStickYPlus = New TcJoy.MyVerticalProgessBar()
-        Me.ProgressBar_LeftStickYPlus = New TcJoy.MyVerticalProgessBar()
         Me.Label_LeftShoulderVal = New System.Windows.Forms.Label()
         Me.Label_RightShoulderVal = New System.Windows.Forms.Label()
         Me.Label_RightStickYNeg = New System.Windows.Forms.Label()
@@ -100,6 +94,12 @@ Partial Class Form1
         Me.CheckBox_AutoConnectOnOpen = New System.Windows.Forms.CheckBox()
         Me.TabPage_Help = New System.Windows.Forms.TabPage()
         Me.RichTextBox_Help = New System.Windows.Forms.RichTextBox()
+        Me.ProgressBar_RightShoulderAnalog = New TcJoy.MyVerticalProgessBar()
+        Me.ProgressBar_LeftShoulderAnalog = New TcJoy.MyVerticalProgessBar()
+        Me.ProgressBar_LeftStickYMinus = New TcJoy.MyVerticalProgessBarMinus()
+        Me.ProgressBar_RightStickYMinus = New TcJoy.MyVerticalProgessBarMinus()
+        Me.ProgressBar_RightStickYPlus = New TcJoy.MyVerticalProgessBar()
+        Me.ProgressBar_LeftStickYPlus = New TcJoy.MyVerticalProgessBar()
         Me.TabControl.SuspendLayout()
         Me.TabPage_LiveStatus.SuspendLayout()
         Me.TabPage_Connection.SuspendLayout()
@@ -172,64 +172,6 @@ Partial Class Form1
         Me.TabPage_LiveStatus.TabIndex = 0
         Me.TabPage_LiveStatus.Text = "Live Status"
         Me.TabPage_LiveStatus.UseVisualStyleBackColor = True
-        '
-        'ProgressBar_RightShoulderAnalog
-        '
-        Me.ProgressBar_RightShoulderAnalog.Location = New System.Drawing.Point(544, 135)
-        Me.ProgressBar_RightShoulderAnalog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ProgressBar_RightShoulderAnalog.Maximum = 255
-        Me.ProgressBar_RightShoulderAnalog.Name = "ProgressBar_RightShoulderAnalog"
-        Me.ProgressBar_RightShoulderAnalog.Size = New System.Drawing.Size(15, 69)
-        Me.ProgressBar_RightShoulderAnalog.TabIndex = 58
-        Me.ProgressBar_RightShoulderAnalog.Value = 255
-        '
-        'ProgressBar_LeftShoulderAnalog
-        '
-        Me.ProgressBar_LeftShoulderAnalog.Location = New System.Drawing.Point(152, 135)
-        Me.ProgressBar_LeftShoulderAnalog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ProgressBar_LeftShoulderAnalog.Maximum = 255
-        Me.ProgressBar_LeftShoulderAnalog.Name = "ProgressBar_LeftShoulderAnalog"
-        Me.ProgressBar_LeftShoulderAnalog.Size = New System.Drawing.Size(15, 69)
-        Me.ProgressBar_LeftShoulderAnalog.TabIndex = 57
-        Me.ProgressBar_LeftShoulderAnalog.Value = 255
-        '
-        'ProgressBar_LeftStickYMinus
-        '
-        Me.ProgressBar_LeftStickYMinus.Location = New System.Drawing.Point(153, 391)
-        Me.ProgressBar_LeftStickYMinus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ProgressBar_LeftStickYMinus.Maximum = 32768
-        Me.ProgressBar_LeftStickYMinus.Name = "ProgressBar_LeftStickYMinus"
-        Me.ProgressBar_LeftStickYMinus.Size = New System.Drawing.Size(14, 69)
-        Me.ProgressBar_LeftStickYMinus.TabIndex = 56
-        '
-        'ProgressBar_RightStickYMinus
-        '
-        Me.ProgressBar_RightStickYMinus.Location = New System.Drawing.Point(498, 572)
-        Me.ProgressBar_RightStickYMinus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ProgressBar_RightStickYMinus.Maximum = 32768
-        Me.ProgressBar_RightStickYMinus.Name = "ProgressBar_RightStickYMinus"
-        Me.ProgressBar_RightStickYMinus.Size = New System.Drawing.Size(14, 69)
-        Me.ProgressBar_RightStickYMinus.TabIndex = 55
-        '
-        'ProgressBar_RightStickYPlus
-        '
-        Me.ProgressBar_RightStickYPlus.Location = New System.Drawing.Point(498, 478)
-        Me.ProgressBar_RightStickYPlus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ProgressBar_RightStickYPlus.Maximum = 32768
-        Me.ProgressBar_RightStickYPlus.Name = "ProgressBar_RightStickYPlus"
-        Me.ProgressBar_RightStickYPlus.Size = New System.Drawing.Size(15, 69)
-        Me.ProgressBar_RightStickYPlus.TabIndex = 54
-        Me.ProgressBar_RightStickYPlus.Value = 32768
-        '
-        'ProgressBar_LeftStickYPlus
-        '
-        Me.ProgressBar_LeftStickYPlus.Location = New System.Drawing.Point(153, 302)
-        Me.ProgressBar_LeftStickYPlus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ProgressBar_LeftStickYPlus.Maximum = 32768
-        Me.ProgressBar_LeftStickYPlus.Name = "ProgressBar_LeftStickYPlus"
-        Me.ProgressBar_LeftStickYPlus.Size = New System.Drawing.Size(15, 69)
-        Me.ProgressBar_LeftStickYPlus.TabIndex = 51
-        Me.ProgressBar_LeftStickYPlus.Value = 32768
         '
         'Label_LeftShoulderVal
         '
@@ -515,17 +457,17 @@ Partial Class Form1
         '
         'ProgressBar_Controller0Battery
         '
-        Me.ProgressBar_Controller0Battery.Location = New System.Drawing.Point(600, 43)
+        Me.ProgressBar_Controller0Battery.Location = New System.Drawing.Point(528, 43)
         Me.ProgressBar_Controller0Battery.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ProgressBar_Controller0Battery.MarqueeAnimationSpeed = 1
         Me.ProgressBar_Controller0Battery.Name = "ProgressBar_Controller0Battery"
-        Me.ProgressBar_Controller0Battery.Size = New System.Drawing.Size(141, 15)
+        Me.ProgressBar_Controller0Battery.Size = New System.Drawing.Size(210, 15)
         Me.ProgressBar_Controller0Battery.TabIndex = 17
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(532, 40)
+        Me.Label18.Location = New System.Drawing.Point(456, 38)
         Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(64, 20)
@@ -534,27 +476,27 @@ Partial Class Form1
         '
         'Label_Controller0_Connection
         '
-        Me.Label_Controller0_Connection.AutoSize = True
         Me.Label_Controller0_Connection.BackColor = System.Drawing.Color.Transparent
         Me.Label_Controller0_Connection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label_Controller0_Connection.Location = New System.Drawing.Point(531, 9)
+        Me.Label_Controller0_Connection.Location = New System.Drawing.Point(460, 9)
         Me.Label_Controller0_Connection.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label_Controller0_Connection.Name = "Label_Controller0_Connection"
-        Me.Label_Controller0_Connection.Size = New System.Drawing.Size(209, 22)
+        Me.Label_Controller0_Connection.Size = New System.Drawing.Size(278, 29)
         Me.Label_Controller0_Connection.TabIndex = 15
-        Me.Label_Controller0_Connection.Text = "     Controller 0 Connection   "
+        Me.Label_Controller0_Connection.Text = "Controller 0 Connection"
+        Me.Label_Controller0_Connection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label_JoyActiveFromPLC
         '
-        Me.Label_JoyActiveFromPLC.AutoSize = True
         Me.Label_JoyActiveFromPLC.BackColor = System.Drawing.Color.Transparent
         Me.Label_JoyActiveFromPLC.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label_JoyActiveFromPLC.Location = New System.Drawing.Point(123, 895)
+        Me.Label_JoyActiveFromPLC.Location = New System.Drawing.Point(106, 891)
         Me.Label_JoyActiveFromPLC.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label_JoyActiveFromPLC.Name = "Label_JoyActiveFromPLC"
-        Me.Label_JoyActiveFromPLC.Size = New System.Drawing.Size(150, 22)
+        Me.Label_JoyActiveFromPLC.Size = New System.Drawing.Size(177, 35)
         Me.Label_JoyActiveFromPLC.TabIndex = 14
-        Me.Label_JoyActiveFromPLC.Text = "     Latency Status   "
+        Me.Label_JoyActiveFromPLC.Text = "Latency Status"
+        Me.Label_JoyActiveFromPLC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ProgressBar_ADSBad
         '
@@ -972,6 +914,64 @@ Partial Class Form1
         Me.RichTextBox_Help.TabIndex = 0
         Me.RichTextBox_Help.Text = resources.GetString("RichTextBox_Help.Text")
         '
+        'ProgressBar_RightShoulderAnalog
+        '
+        Me.ProgressBar_RightShoulderAnalog.Location = New System.Drawing.Point(544, 135)
+        Me.ProgressBar_RightShoulderAnalog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ProgressBar_RightShoulderAnalog.Maximum = 255
+        Me.ProgressBar_RightShoulderAnalog.Name = "ProgressBar_RightShoulderAnalog"
+        Me.ProgressBar_RightShoulderAnalog.Size = New System.Drawing.Size(15, 69)
+        Me.ProgressBar_RightShoulderAnalog.TabIndex = 58
+        Me.ProgressBar_RightShoulderAnalog.Value = 255
+        '
+        'ProgressBar_LeftShoulderAnalog
+        '
+        Me.ProgressBar_LeftShoulderAnalog.Location = New System.Drawing.Point(152, 135)
+        Me.ProgressBar_LeftShoulderAnalog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ProgressBar_LeftShoulderAnalog.Maximum = 255
+        Me.ProgressBar_LeftShoulderAnalog.Name = "ProgressBar_LeftShoulderAnalog"
+        Me.ProgressBar_LeftShoulderAnalog.Size = New System.Drawing.Size(15, 69)
+        Me.ProgressBar_LeftShoulderAnalog.TabIndex = 57
+        Me.ProgressBar_LeftShoulderAnalog.Value = 255
+        '
+        'ProgressBar_LeftStickYMinus
+        '
+        Me.ProgressBar_LeftStickYMinus.Location = New System.Drawing.Point(153, 391)
+        Me.ProgressBar_LeftStickYMinus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ProgressBar_LeftStickYMinus.Maximum = 32768
+        Me.ProgressBar_LeftStickYMinus.Name = "ProgressBar_LeftStickYMinus"
+        Me.ProgressBar_LeftStickYMinus.Size = New System.Drawing.Size(14, 69)
+        Me.ProgressBar_LeftStickYMinus.TabIndex = 56
+        '
+        'ProgressBar_RightStickYMinus
+        '
+        Me.ProgressBar_RightStickYMinus.Location = New System.Drawing.Point(498, 572)
+        Me.ProgressBar_RightStickYMinus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ProgressBar_RightStickYMinus.Maximum = 32768
+        Me.ProgressBar_RightStickYMinus.Name = "ProgressBar_RightStickYMinus"
+        Me.ProgressBar_RightStickYMinus.Size = New System.Drawing.Size(14, 69)
+        Me.ProgressBar_RightStickYMinus.TabIndex = 55
+        '
+        'ProgressBar_RightStickYPlus
+        '
+        Me.ProgressBar_RightStickYPlus.Location = New System.Drawing.Point(498, 478)
+        Me.ProgressBar_RightStickYPlus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ProgressBar_RightStickYPlus.Maximum = 32768
+        Me.ProgressBar_RightStickYPlus.Name = "ProgressBar_RightStickYPlus"
+        Me.ProgressBar_RightStickYPlus.Size = New System.Drawing.Size(15, 69)
+        Me.ProgressBar_RightStickYPlus.TabIndex = 54
+        Me.ProgressBar_RightStickYPlus.Value = 32768
+        '
+        'ProgressBar_LeftStickYPlus
+        '
+        Me.ProgressBar_LeftStickYPlus.Location = New System.Drawing.Point(153, 302)
+        Me.ProgressBar_LeftStickYPlus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ProgressBar_LeftStickYPlus.Maximum = 32768
+        Me.ProgressBar_LeftStickYPlus.Name = "ProgressBar_LeftStickYPlus"
+        Me.ProgressBar_LeftStickYPlus.Size = New System.Drawing.Size(15, 69)
+        Me.ProgressBar_LeftStickYPlus.TabIndex = 51
+        Me.ProgressBar_LeftStickYPlus.Value = 32768
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -980,7 +980,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TabControl)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "Form1"
-        Me.Text = "ARM TcJoy"
+        Me.Text = "TcJoy by Jensen Mechatronics"
         Me.TabControl.ResumeLayout(False)
         Me.TabPage_LiveStatus.ResumeLayout(False)
         Me.TabPage_LiveStatus.PerformLayout()

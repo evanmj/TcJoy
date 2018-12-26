@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4019.2">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
   <POU Name="FB_TcJoy" Id="{9129424f-01bc-4dfe-bce8-563189fd07db}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_TcJoy
 VAR_INPUT
@@ -54,9 +54,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// TODO!!!! Ensure user's buttons are released before allowing control again.
-
-iScanCount := iScanCount+1;
+      <ST><![CDATA[iScanCount := iScanCount+1;
 
 UpdateRate_TMR(PT:=T#999M);
 
@@ -70,6 +68,8 @@ IF HeartBeatChanged_RTRIG.Q THEN
 	UpdateRate_TMR(IN:=TRUE); // Reset Timer
 END_IF
 
+
+
 LatencyWatchdog_TMR(IN:=bHeartBeatToggle, PT:=DINT_TO_TIME(iADSWatchdogMS));
 
 // AHH Latency Elapsed!
@@ -77,6 +77,8 @@ IF LatencyWatchdog_TMR.Q THEN
 	bWatchdogFailureActive := TRUE;
 	bControllerConnected := FALSE;
 END_IF
+
+// Calcualte rate we get data (for display only on VB Side)
 
 
 
@@ -145,5 +147,15 @@ END_IF
 
 bIsActive := NOT bWatchdogFailureActive AND bControllerConnected AND NOT bControlerInputsMustBeReleased;]]></ST>
     </Implementation>
+    <LineIds Name="FB_TcJoy">
+      <LineId Id="5" Count="12" />
+      <LineId Id="146" Count="1" />
+      <LineId Id="18" Count="7" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="27" Count="64" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
