@@ -7,17 +7,39 @@ Imports System
 '
 ' TcJoy, by Evan Jensen of Jensen Mecharonics, LLC.  2018 
 '
-'
+' See the github page for more information: https://github.com/evanmj/TcJoy
 '
 ' TODO: Any todos in code
 ' TODO: Fix help tab, add help text/btns on plc settings
 ' TODO: Add donate link and possibly 'nag' screen
 ' TODO: Add licnese to code
 ' TODO: Make howto video
+' TODO: Major data validation
+' TODO: Make bar red if inside threshold for analog sticks
 ' 
 '
+' MIT License
 
+' Copyright(c) 2018 Evan Jensen of Jensen Mecharonics, LLC.
 
+' Permission Is hereby granted, free Of charge, to any person obtaining a copy
+' of this software And associated documentation files (the "Software"), to deal
+' in the Software without restriction, including without limitation the rights
+' to use, copy, modify, merge, publish, distribute, sublicense, And/Or sell
+' copies of the Software, And to permit persons to whom the Software Is
+' furnished to do so, subject to the following conditions:
+
+' The above copyright notice And this permission notice shall be included In all
+' copies Or substantial portions of the Software.
+
+' THE SOFTWARE Is PROVIDED "AS IS", WITHOUT WARRANTY Of ANY KIND, EXPRESS Or
+' IMPLIED, INCLUDING BUT Not LIMITED To THE WARRANTIES Of MERCHANTABILITY,
+' FITNESS FOR A PARTICULAR PURPOSE And NONINFRINGEMENT. IN NO EVENT SHALL THE
+' AUTHORS Or COPYRIGHT HOLDERS BE LIABLE For ANY CLAIM, DAMAGES Or OTHER
+' LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
+' OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
+' SOFTWARE.
+'
 
 Public Class Form1
 
@@ -173,6 +195,21 @@ Public Class Form1
                     Label_LeftStickYNeg.Text = MyController.LeftThumbStick.Y.ToString
                 End If
 
+                ' Color thumbstick sliders
+                If Math.Abs(MyController.LeftThumbStick.X) < CInt(TextBox_AnalogDeadzone.Text) Then
+                    SendMessage(ProgressBar_LeftStickXPlus.Handle, 1040, 2, 0) ' Turn Red
+                    SendMessage(ProgressBar_LeftStickXMinus.Handle, 1040, 2, 0) ' Turn Red
+                Else
+                    SendMessage(ProgressBar_LeftStickXPlus.Handle, 1040, 1, 0) ' Turn Green
+                    SendMessage(ProgressBar_LeftStickXMinus.Handle, 1040, 1, 0) ' Turn Green
+                End If
+                If Math.Abs(MyController.LeftThumbStick.Y) < CInt(TextBox_AnalogDeadzone.Text) Then
+                    SendMessage(ProgressBar_LeftStickYPlus.Handle, 1040, 2, 0) ' Turn Red
+                    SendMessage(ProgressBar_LeftStickYMinus.Handle, 1040, 2, 0) ' Turn Red
+                Else
+                    SendMessage(ProgressBar_LeftStickYPlus.Handle, 1040, 1, 0) ' Turn Green
+                    SendMessage(ProgressBar_LeftStickYMinus.Handle, 1040, 1, 0) ' Turn Green
+                End If
 
                 If MyController.RightThumbStick.X >= 0 Then
                     UpdateProgressBar(ProgressBar_RightStickXPlus, Math.Abs(MyController.RightThumbStick.X))
@@ -198,6 +235,22 @@ Public Class Form1
                     Label_RightStickYNeg.Text = MyController.RightThumbStick.Y.ToString
                 End If
 
+                ' Color thumbstick sliders
+                If Math.Abs(MyController.RightThumbStick.X) < CInt(TextBox_AnalogDeadzone.Text) Then
+                    SendMessage(ProgressBar_RightStickXPlus.Handle, 1040, 2, 0) ' Turn Red
+                    SendMessage(ProgressBar_RightStickXMinus.Handle, 1040, 2, 0) ' Turn Red
+                Else
+                    SendMessage(ProgressBar_RightStickXPlus.Handle, 1040, 1, 0) ' Turn Green
+                    SendMessage(ProgressBar_RightStickXMinus.Handle, 1040, 1, 0) ' Turn Green
+                End If
+                If Math.Abs(MyController.RightThumbStick.Y) < CInt(TextBox_AnalogDeadzone.Text) Then
+                    SendMessage(ProgressBar_RightStickYPlus.Handle, 1040, 2, 0) ' Turn Red
+                    SendMessage(ProgressBar_RightStickYMinus.Handle, 1040, 2, 0) ' Turn Red
+                Else
+                    SendMessage(ProgressBar_RightStickYPlus.Handle, 1040, 1, 0) ' Turn Green
+                    SendMessage(ProgressBar_RightStickYMinus.Handle, 1040, 1, 0) ' Turn Green
+                End If
+
                 CheckBox_AButton.Checked = MyController.IsAPressed
                 CheckBox_BButton.Checked = MyController.IsBPressed
                 CheckBox_XButton.Checked = MyController.IsXPressed
@@ -218,6 +271,18 @@ Public Class Form1
                 Label_LeftShoulderVal.Text = MyController.LeftTrigger.ToString
                 UpdateProgressBar(ProgressBar_RightShoulderAnalog, MyController.RightTrigger)
                 Label_RightShoulderVal.Text = MyController.RightTrigger.ToString
+
+                ' Color shoulder sliders
+                If MyController.LeftTrigger < CInt(TextBox_ShoulderDeadzone.Text) Then
+                    SendMessage(ProgressBar_LeftShoulderAnalog.Handle, 1040, 2, 0) ' Turn Red
+                Else
+                    SendMessage(ProgressBar_LeftShoulderAnalog.Handle, 1040, 1, 0) ' Turn Green
+                End If
+                If MyController.RightTrigger < CInt(TextBox_ShoulderDeadzone.Text) Then
+                    SendMessage(ProgressBar_RightShoulderAnalog.Handle, 1040, 2, 0) ' Turn Red
+                Else
+                    SendMessage(ProgressBar_RightShoulderAnalog.Handle, 1040, 1, 0) ' Turn Green
+                End If
 
                 Select Case MyController.BatteryInformationGamepad.BatteryLevel
 
