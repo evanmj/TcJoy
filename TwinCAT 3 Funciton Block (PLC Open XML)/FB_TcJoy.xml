@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.8.10" creationDateTime="2016-06-16T12:54:51.2002802" />
+  <contentHeader name="Untitled1" modificationDateTime="2016-06-16T12:54:51.2032817">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="FB_TcJoy" pouType="functionBlock">
+        <interface>
+          <outputVars>
+            <variable name="bIsActive">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Are we running?</xhtml>
+              </documentation>
+            </variable>
+            <variable name="Start_Button">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Controller Outputs for use in programs:</xhtml>
+              </documentation>
+            </variable>
+            <variable name="Back_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="A_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="B_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="X_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="Y_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="LeftShoulder_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="RightShoulder_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="LeftStick_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="RightStick_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="DPad_Up_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="DPad_Left_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="DPad_Right_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="DPad_Down_Button">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="iLeftStick_X_Axis">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="iLeftStick_Y_Axis">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="iRightStick_X_Axis">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="iRightStick_Y_Axis">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="iLeftTrigger_Axis">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="iRightTrigger_Axis">
+              <type>
+                <DINT />
+              </type>
+            </variable>
+            <variable name="sBatteryInfo">
+              <type>
+                <string />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="bHeartBeatToggle">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> From VB App</xhtml>
+              </documentation>
+            </variable>
+            <variable name="iADSWatchdogMS">
+              <type>
+                <DINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> If Rate is &gt; this, all outputs go to 0.</xhtml>
+              </documentation>
+            </variable>
+            <variable name="iADSWatchdogDeadDurationMS">
+              <type>
+                <DINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> If watchdog trips, outputs go to 0 for this long.</xhtml>
+              </documentation>
+            </variable>
+            <variable name="bWatchdogFailureActive">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="iUpdateRateMS">
+              <type>
+                <DINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Rate in MS between heartbeat changes detected.</xhtml>
+              </documentation>
+            </variable>
+            <variable name="HeartBeatChanged_RTRIG">
+              <type>
+                <derived name="R_TRIG" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Internal Use Only</xhtml>
+              </documentation>
+            </variable>
+            <variable name="bHeartBeatToggle_Last">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="UpdateRate_TMR">
+              <type>
+                <derived name="TON" />
+              </type>
+            </variable>
+            <variable name="LatencyWatchdog_TMR">
+              <type>
+                <derived name="TON" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Watch for missing ADS and kill joy output for a while.</xhtml>
+              </documentation>
+            </variable>
+            <variable name="LatencyWatchdogDeadDuration_TMR">
+              <type>
+                <derived name="TON" />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Watchdog will kill the outputs for this long...</xhtml>
+              </documentation>
+            </variable>
+            <variable name="iScanCount">
+              <type>
+                <DINT />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Scan counter for VB Status.</xhtml>
+              </documentation>
+            </variable>
+            <variable name="bControllerConnected">
+              <type>
+                <BOOL />
+              </type>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> Is there a controller connected?</xhtml>
+              </documentation>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">iScanCount := iScanCount+1;
+
+UpdateRate_TMR(PT:=T#999M);
+
+HeartBeatChanged_RTRIG(clk := bHeartBeatToggle &lt;&gt; bHeartBeatToggle_Last);
+
+// VB "Just" changed heartbeat.
+IF HeartBeatChanged_RTRIG.Q THEN
+	bHeartBeatToggle_Last := bHeartBeatToggle;
+	iUpdateRateMS := TIME_TO_DINT(UpdateRate_TMR.ET); // Grab Elapsed Time
+	UpdateRate_TMR(IN:=FALSE); // Reset Timer
+	UpdateRate_TMR(IN:=TRUE); // Reset Timer
+END_IF
+
+LatencyWatchdog_TMR(IN:=bHeartBeatToggle, PT:=DINT_TO_TIME(iADSWatchdogMS));
+
+// AHH Latency Elapsed!
+IF LatencyWatchdog_TMR.Q THEN
+	bWatchdogFailureActive := TRUE;
+	bControllerConnected := FALSE;
+END_IF
+
+LatencyWatchdogDeadDuration_TMR(IN:=bWatchdogFailureActive, PT:=DINT_TO_TIME(iADSWatchdogDeadDurationMS));
+
+// ReEnable after setting duration expires
+IF LatencyWatchdogDeadDuration_TMR.Q THEN
+	bWatchdogFailureActive := FALSE;
+END_IF
+
+// Null the outputs on WD Active so we don't jog into a wall if we lose connection.
+IF bWatchdogFailureActive OR NOT bControllerConnected THEN
+	Start_Button := FALSE; 
+	Back_Button := FALSE; 
+	A_Button := FALSE; 
+	B_Button := FALSE; 
+	X_Button := FALSE; 
+	Y_Button := FALSE; 
+	LeftShoulder_Button := FALSE; 
+	RightShoulder_Button := FALSE; 
+	LeftStick_Button := FALSE; 
+	RightStick_Button := FALSE; 
+	DPad_Up_Button := FALSE; 
+	DPad_Left_Button := FALSE; 
+	DPad_Right_Button := FALSE; 
+	DPad_Down_Button := FALSE; 
+	iLeftStick_X_Axis := 0;
+	iLeftStick_Y_Axis := 0;
+	iRightStick_X_Axis := 0;
+	iRightStick_Y_Axis := 0;
+	iLeftTrigger_Axis := 0;
+	iRightTrigger_Axis := 0;
+	sBatteryInfo		:= 'Unkn';
+	
+	UpdateRate_TMR(IN:=FALSE); // Reset Rate Timer
+ELSE
+	; // All is well, VB will update our values constantly.
+END_IF
+
+bIsActive := NOT bWatchdogFailureActive AND bControllerConnected;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK FB_TcJoy
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	bIsActive : BOOL;  // Are we running?
+	// Controller Outputs for use in programs:
+	Start_Button : BOOL; 
+	Back_Button : BOOL;
+	A_Button : BOOL;
+	B_Button : BOOL;
+	X_Button : BOOL;
+	Y_Button : BOOL;
+	LeftShoulder_Button : BOOL;
+	RightShoulder_Button : BOOL;
+	LeftStick_Button : BOOL;
+	RightStick_Button : BOOL;
+	DPad_Up_Button : BOOL;
+	DPad_Left_Button : BOOL;
+	DPad_Right_Button : BOOL;
+	DPad_Down_Button : BOOL;
+	iLeftStick_X_Axis : DINT;
+	iLeftStick_Y_Axis : DINT;
+	iRightStick_X_Axis : DINT;
+	iRightStick_Y_Axis : DINT;
+	iLeftTrigger_Axis : DINT;
+	iRightTrigger_Axis  : DINT;
+	sBatteryInfo		: STRING;
+END_VAR
+VAR
+	// From VB App To PLC
+	bHeartBeatToggle : BOOL;  // From VB App
+	iADSWatchdogMS : DINT;    // If Rate is &gt; this, all outputs go to 0.
+	iADSWatchdogDeadDurationMS : DINT;    // If watchdog trips, outputs go to 0 for this long.
+	bWatchdogFailureActive			: BOOL;
+	// From PLC To VB (Status)
+	iUpdateRateMS : DINT;    // Rate in MS between heartbeat changes detected.
+	
+	// Internal Use Only
+	HeartBeatChanged_RTRIG : R_TRIG;
+	bHeartBeatToggle_Last : BOOL;
+	UpdateRate_TMR : TON;
+	
+	LatencyWatchdog_TMR : TON; // Watch for missing ADS and kill joy output for a while.
+	LatencyWatchdogDeadDuration_TMR : TON; // Watchdog will kill the outputs for this long...
+	
+	iScanCount: DINT; // Scan counter for VB Status.
+	
+	bControllerConnected : BOOL;  // Is there a controller connected?
+	
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>9129424f-01bc-4dfe-bce8-563189fd07db</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="FB_TcJoy" ObjectId="9129424f-01bc-4dfe-bce8-563189fd07db" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4019.2">
+  <POU Name="FB_TcJoy" Id="{9129424f-01bc-4dfe-bce8-563189fd07db}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TcJoy
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	bIsActive : BOOL;  // Are we running?
+	// Controller Outputs for use in programs:
+	Start_Button : BOOL; 
+	Back_Button : BOOL;
+	A_Button : BOOL;
+	B_Button : BOOL;
+	X_Button : BOOL;
+	Y_Button : BOOL;
+	LeftShoulder_Button : BOOL;
+	RightShoulder_Button : BOOL;
+	LeftStick_Button : BOOL;
+	RightStick_Button : BOOL;
+	DPad_Up_Button : BOOL;
+	DPad_Left_Button : BOOL;
+	DPad_Right_Button : BOOL;
+	DPad_Down_Button : BOOL;
+	iLeftStick_X_Axis : DINT;
+	iLeftStick_Y_Axis : DINT;
+	iRightStick_X_Axis : DINT;
+	iRightStick_Y_Axis : DINT;
+	iLeftTrigger_Axis : DINT;
+	iRightTrigger_Axis  : DINT;
+	sBatteryInfo		: STRING;
+END_VAR
+VAR
+	// From VB App To PLC
+	bHeartBeatToggle : BOOL;  // From VB App
+	iADSWatchdogMS : DINT;    // If Rate is > this, all outputs go to 0.
+	iADSWatchdogDeadDurationMS : DINT;    // If watchdog trips, outputs go to 0 for this long.
+	bWatchdogFailureActive			: BOOL;
+	bControlerInputsMustBeReleased  : BOOL;  // Are controller inputs holding us in latency lock down?
+	// From PLC To VB (Status)
+	iUpdateRateMS : DINT;    // Rate in MS between heartbeat changes detected.
+	
+	// Internal Use Only
+	HeartBeatChanged_RTRIG : R_TRIG;
+	bHeartBeatToggle_Last : BOOL;
+	UpdateRate_TMR : TON;
+	
+	LatencyWatchdog_TMR : TON; // Watch for missing ADS and kill joy output for a while.
+	LatencyWatchdogDeadDuration_TMR : TON; // Watchdog will kill the outputs for this long...
+	
+	iScanCount: DINT; // Scan counter for VB Status.
+	
+	bControllerConnected : BOOL;  // Is there a controller connected?
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// TODO!!!! Ensure user's buttons are released before allowing control again.
+
+iScanCount := iScanCount+1;
+
+UpdateRate_TMR(PT:=T#999M);
+
+HeartBeatChanged_RTRIG(clk := bHeartBeatToggle <> bHeartBeatToggle_Last);
+
+// VB "Just" changed heartbeat.
+IF HeartBeatChanged_RTRIG.Q THEN
+	bHeartBeatToggle_Last := bHeartBeatToggle;
+	iUpdateRateMS := TIME_TO_DINT(UpdateRate_TMR.ET); // Grab Elapsed Time
+	UpdateRate_TMR(IN:=FALSE); // Reset Timer
+	UpdateRate_TMR(IN:=TRUE); // Reset Timer
+END_IF
+
+LatencyWatchdog_TMR(IN:=bHeartBeatToggle, PT:=DINT_TO_TIME(iADSWatchdogMS));
+
+// AHH Latency Elapsed!
+IF LatencyWatchdog_TMR.Q THEN
+	bWatchdogFailureActive := TRUE;
+	bControllerConnected := FALSE;
+END_IF
+
+
+
+//Force User to release all buttons/sticks on controller before allowing outputs again.
+IF bWatchdogFailureActive AND (Start_Button OR 
+	Back_Button OR 
+	A_Button OR 
+	B_Button OR 
+	X_Button OR 
+	Y_Button OR 
+	LeftShoulder_Button OR 
+	RightShoulder_Button OR 
+	LeftStick_Button OR
+	RightStick_Button OR
+	DPad_Up_Button OR 
+	DPad_Left_Button OR 
+	DPad_Right_Button OR 
+	DPad_Down_Button OR 
+	iLeftStick_X_Axis <> 0 OR
+	iLeftStick_Y_Axis <> 0 OR
+	iRightStick_X_Axis <> 0 OR
+	iRightStick_Y_Axis <> 0 OR
+	iLeftTrigger_Axis <> 0 OR
+	iRightTrigger_Axis <> 0)	THEN
+		bControlerInputsMustBeReleased := TRUE;
+ELSE
+		bControlerInputsMustBeReleased := FALSE;
+END_IF
+
+LatencyWatchdogDeadDuration_TMR(IN:=bWatchdogFailureActive AND NOT bControlerInputsMustBeReleased AND bControllerConnected, PT:=DINT_TO_TIME(iADSWatchdogDeadDurationMS));
+
+// ReEnable after setting duration expires
+IF LatencyWatchdogDeadDuration_TMR.Q THEN
+	bWatchdogFailureActive := FALSE;
+END_IF
+
+// Null the outputs on WD Active so we don't jog into a wall if we lose connection.
+IF (bWatchdogFailureActive OR NOT bControllerConnected OR bControlerInputsMustBeReleased) THEN
+		// Null all outputs now.
+		Start_Button := FALSE; 
+		Back_Button := FALSE; 
+		A_Button := FALSE; 
+		B_Button := FALSE; 
+		X_Button := FALSE; 
+		Y_Button := FALSE; 
+		LeftShoulder_Button := FALSE; 
+		RightShoulder_Button := FALSE; 
+		LeftStick_Button := FALSE; 
+		RightStick_Button := FALSE; 
+		DPad_Up_Button := FALSE; 
+		DPad_Left_Button := FALSE; 
+		DPad_Right_Button := FALSE; 
+		DPad_Down_Button := FALSE; 
+		iLeftStick_X_Axis := 0;
+		iLeftStick_Y_Axis := 0;
+		iRightStick_X_Axis := 0;
+		iRightStick_Y_Axis := 0;
+		iLeftTrigger_Axis := 0;
+		iRightTrigger_Axis := 0;
+		sBatteryInfo		:= 'Unkn';
+		
+		UpdateRate_TMR(IN:=FALSE); // Reset Rate Timer
+ELSE
+	; // All is well, VB will update our values constantly.
+END_IF
+
+bIsActive := NOT bWatchdogFailureActive AND bControllerConnected AND NOT bControlerInputsMustBeReleased;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
