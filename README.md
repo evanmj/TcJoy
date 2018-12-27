@@ -131,6 +131,13 @@ IF TcJoy.bControllerConnected AND TcJoy.bIsActive THEN
 END_IF
 ```
 
+## See in action
+
+Here is a video from my Motion Control with PLCs video series where I use the previously closed source version of TcJoy:
+
+[![Video](http://img.youtube.com/vi/mXQ1IAxP74w/0.jpg)](https://youtu.be/mXQ1IAxP74w?t=98)
+
+
 
 ## Support / Troubleshooting
 
