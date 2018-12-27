@@ -526,6 +526,7 @@ Partial Class Form1
         Me.TextBox_ADSDataRateAchieved.Name = "TextBox_ADSDataRateAchieved"
         Me.TextBox_ADSDataRateAchieved.Size = New System.Drawing.Size(314, 26)
         Me.TextBox_ADSDataRateAchieved.TabIndex = 11
+        Me.TextBox_ADSDataRateAchieved.TabStop = False
         Me.TextBox_ADSDataRateAchieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label6
@@ -546,6 +547,7 @@ Partial Class Form1
         Me.TextBox_ADSConnectionStatus2.Name = "TextBox_ADSConnectionStatus2"
         Me.TextBox_ADSConnectionStatus2.Size = New System.Drawing.Size(314, 26)
         Me.TextBox_ADSConnectionStatus2.TabIndex = 9
+        Me.TextBox_ADSConnectionStatus2.TabStop = False
         Me.TextBox_ADSConnectionStatus2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label5
@@ -614,7 +616,7 @@ Partial Class Form1
         Me.TextBox_ShoulderDeadzone.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TextBox_ShoulderDeadzone.Name = "TextBox_ShoulderDeadzone"
         Me.TextBox_ShoulderDeadzone.Size = New System.Drawing.Size(70, 26)
-        Me.TextBox_ShoulderDeadzone.TabIndex = 25
+        Me.TextBox_ShoulderDeadzone.TabIndex = 7
         Me.TextBox_ShoulderDeadzone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label15
@@ -643,7 +645,7 @@ Partial Class Form1
         Me.TextBox_AnalogDeadzone.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TextBox_AnalogDeadzone.Name = "TextBox_AnalogDeadzone"
         Me.TextBox_AnalogDeadzone.Size = New System.Drawing.Size(70, 26)
-        Me.TextBox_AnalogDeadzone.TabIndex = 22
+        Me.TextBox_AnalogDeadzone.TabIndex = 6
         Me.TextBox_AnalogDeadzone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GroupBox_PLC
@@ -695,7 +697,7 @@ Partial Class Form1
         Me.TextBox_ADSWatchdogDeadDuration.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TextBox_ADSWatchdogDeadDuration.Name = "TextBox_ADSWatchdogDeadDuration"
         Me.TextBox_ADSWatchdogDeadDuration.Size = New System.Drawing.Size(70, 26)
-        Me.TextBox_ADSWatchdogDeadDuration.TabIndex = 19
+        Me.TextBox_ADSWatchdogDeadDuration.TabIndex = 4
         Me.TextBox_ADSWatchdogDeadDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label13
@@ -724,7 +726,7 @@ Partial Class Form1
         Me.TextBox_ADSWatchdog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TextBox_ADSWatchdog.Name = "TextBox_ADSWatchdog"
         Me.TextBox_ADSWatchdog.Size = New System.Drawing.Size(70, 26)
-        Me.TextBox_ADSWatchdog.TabIndex = 16
+        Me.TextBox_ADSWatchdog.TabIndex = 3
         Me.TextBox_ADSWatchdog.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label11
@@ -743,7 +745,7 @@ Partial Class Form1
         Me.Button_ADSDisconnect.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button_ADSDisconnect.Name = "Button_ADSDisconnect"
         Me.Button_ADSDisconnect.Size = New System.Drawing.Size(207, 35)
-        Me.Button_ADSDisconnect.TabIndex = 15
+        Me.Button_ADSDisconnect.TabIndex = 10
         Me.Button_ADSDisconnect.Text = "Disconnect"
         Me.Button_ADSDisconnect.UseVisualStyleBackColor = True
         '
@@ -753,7 +755,7 @@ Partial Class Form1
         Me.TextBox_TcJoyPath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TextBox_TcJoyPath.Name = "TextBox_TcJoyPath"
         Me.TextBox_TcJoyPath.Size = New System.Drawing.Size(504, 26)
-        Me.TextBox_TcJoyPath.TabIndex = 13
+        Me.TextBox_TcJoyPath.TabIndex = 5
         '
         'Label9
         '
@@ -781,7 +783,7 @@ Partial Class Form1
         Me.TextBox_ADSRate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TextBox_ADSRate.Name = "TextBox_ADSRate"
         Me.TextBox_ADSRate.Size = New System.Drawing.Size(70, 26)
-        Me.TextBox_ADSRate.TabIndex = 10
+        Me.TextBox_ADSRate.TabIndex = 2
         Me.TextBox_ADSRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7
@@ -811,6 +813,7 @@ Partial Class Form1
         Me.TextBox_TcJoyFunctionBlockStatus.Name = "TextBox_TcJoyFunctionBlockStatus"
         Me.TextBox_TcJoyFunctionBlockStatus.Size = New System.Drawing.Size(314, 26)
         Me.TextBox_TcJoyFunctionBlockStatus.TabIndex = 9
+        Me.TextBox_TcJoyFunctionBlockStatus.TabStop = False
         Me.TextBox_TcJoyFunctionBlockStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label1
@@ -839,7 +842,7 @@ Partial Class Form1
         Me.TextBox_ADSPort.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TextBox_ADSPort.Name = "TextBox_ADSPort"
         Me.TextBox_ADSPort.Size = New System.Drawing.Size(70, 26)
-        Me.TextBox_ADSPort.TabIndex = 2
+        Me.TextBox_ADSPort.TabIndex = 1
         Me.TextBox_ADSPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox_ADSConnectionStatus
@@ -850,6 +853,7 @@ Partial Class Form1
         Me.TextBox_ADSConnectionStatus.Name = "TextBox_ADSConnectionStatus"
         Me.TextBox_ADSConnectionStatus.Size = New System.Drawing.Size(314, 26)
         Me.TextBox_ADSConnectionStatus.TabIndex = 7
+        Me.TextBox_ADSConnectionStatus.TabStop = False
         Me.TextBox_ADSConnectionStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2
@@ -878,7 +882,7 @@ Partial Class Form1
         Me.Button_ADSConnect.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button_ADSConnect.Name = "Button_ADSConnect"
         Me.Button_ADSConnect.Size = New System.Drawing.Size(207, 35)
-        Me.Button_ADSConnect.TabIndex = 4
+        Me.Button_ADSConnect.TabIndex = 9
         Me.Button_ADSConnect.Text = "Connect"
         Me.Button_ADSConnect.UseVisualStyleBackColor = True
         '
@@ -889,7 +893,7 @@ Partial Class Form1
         Me.CheckBox_AutoConnectOnOpen.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.CheckBox_AutoConnectOnOpen.Name = "CheckBox_AutoConnectOnOpen"
         Me.CheckBox_AutoConnectOnOpen.Size = New System.Drawing.Size(197, 24)
-        Me.CheckBox_AutoConnectOnOpen.TabIndex = 5
+        Me.CheckBox_AutoConnectOnOpen.TabIndex = 8
         Me.CheckBox_AutoConnectOnOpen.Text = "Auto Connect On Start"
         Me.CheckBox_AutoConnectOnOpen.UseVisualStyleBackColor = True
         '

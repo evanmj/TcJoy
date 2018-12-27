@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RichTextBox_Help.Text" xml:space="preserve">
-    <value>To use this, connect up an XBOX wireless controller.  Make an instance of FB_TcJoy, preferably in gloabl variables so you don't have to create a custom path.  Connect to the PLC, and then use the output variables to poke into anything in your machine you want.  They will drop to 0 / False if the controller or the ADS link goes away.   See the TcJoy Github page for more information.  </value>
+    <value>To use this, connect up an XBOX wireless controller.  Make an instance of FB_TcJoy, preferably in gloabl variables so you don't have to create a custom path.  Connect to the PLC, and then use the output variables to poke into anything in your machine you want.  They will drop to 0 / False if the controller or the ADS link goes away.   See the TcJoy Github page for more information: https://github.com/evanmj/TcJoy</value>
   </data>
 </root>

@@ -54,11 +54,6 @@ Module PLC_IO_Polling
             End If
         Next
 
-
-
-        ' Return modified object.
-        '        e.Result = e.Argument.TagList
-
     End Sub
 
     Public Sub AddVariablesToList(ByRef BgTaskData As Form1.TaskData)

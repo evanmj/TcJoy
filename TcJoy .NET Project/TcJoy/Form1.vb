@@ -5,17 +5,15 @@ Imports System.ComponentModel
 Imports System
 
 '
-' TcJoy, by Evan Jensen of Jensen Mecharonics, LLC.  2018 
+' TcJoy, by Evan Jensen of Jensen Mecharonics, LLC. 2018 
 '
 ' See the github page for more information: https://github.com/evanmj/TcJoy
 '
 ' TODO: Any todos in code
 ' TODO: Fix help tab, add help text/btns on plc settings
 ' TODO: Add donate link and possibly 'nag' screen
-' TODO: Add licnese to code
 ' TODO: Make howto video
-' TODO: Major data validation
-' TODO: Make bar red if inside threshold for analog sticks
+' TODO: Major data validation on all entry fields.
 ' 
 '
 ' MIT License
@@ -570,11 +568,22 @@ Public Class Form1
     End Sub
 
     Private Sub TextBox_ADSPort_TextChanged(sender As Object, e As EventArgs) Handles TextBox_ADSPort.TextChanged
-        If CInt(TextBox_ADSPort.Text) < 1 Then
-            TextBox_ADSPort.Text = "851"
+        If TextBox_ADSPort.Text <> "" Then
+            Dim value As Integer
+            Try
+                value = Int32.Parse(TextBox_ADSPort.Text)
+            Catch ex As Exception
+                MessageBox.Show("Didn't understand the port you put in, it must be an integer.  Defaulting to 851 for TC3 Runtime 1")
+                TextBox_ADSPort.Text = "851"
+                value = 851
+            End Try
+            If value < 1 Then
+                TextBox_ADSPort.Text = "851"
+            End If
+            My.Settings.sPLC_PORT = TextBox_ADSPort.Text
+            My.Settings.Save()
         End If
-        My.Settings.sPLC_PORT = TextBox_ADSPort.Text
-        My.Settings.Save()
+
     End Sub
 
     Private Sub ConnectToPLC()
@@ -682,18 +691,28 @@ Public Class Form1
         ConnectToPLC()
     End Sub
 
-
     Private Sub TextBox_TcJoyPath_TextChanged(sender As Object, e As EventArgs) Handles TextBox_TcJoyPath.TextChanged
         My.Settings.sTcJoyPath = TextBox_TcJoyPath.Text
         My.Settings.Save()
     End Sub
 
     Private Sub TextBox_ADSRate_TextChanged(sender As Object, e As EventArgs) Handles TextBox_ADSRate.TextChanged
-        If CInt(TextBox_ADSRate.Text) < 1 Then
-            TextBox_ADSRate.Text = "1"
+        If TextBox_ADSRate.Text <> "" Then
+            Dim value As Integer
+            Try
+                value = Int32.Parse(TextBox_ADSRate.Text)
+            Catch ex As Exception
+                MessageBox.Show("Didn't understand the value you put in, it must be an integer. Setting a default value.")
+                TextBox_ADSRate.Text = "100"
+                value = 100
+            End Try
+            If value < 1 Then
+                TextBox_ADSRate.Text = "1"
+            End If
+            My.Settings.sADSRate = TextBox_ADSRate.Text
+            My.Settings.Save()
         End If
-        My.Settings.sADSRate = TextBox_ADSRate.Text
-        My.Settings.Save()
+
     End Sub
 
     Private Sub DisconnectFromPLC()
@@ -724,12 +743,20 @@ Public Class Form1
 
     Private Sub TextBox_ADSWatchdog_TextChanged(sender As Object, e As EventArgs) Handles TextBox_ADSWatchdog.TextChanged
         If TextBox_ADSWatchdog.Text <> "" Then
-            If CInt(TextBox_ADSWatchdog.Text) < 1 Then
+            Dim value As Integer
+            Try
+                value = Int32.Parse(TextBox_ADSWatchdog.Text)
+            Catch ex As Exception
+                MessageBox.Show("Didn't understand the value you put in, it must be an integer. Setting a default value.")
+                TextBox_ADSWatchdog.Text = "200"
+                value = 200
+            End Try
+            If value < 1 Then
                 TextBox_ADSWatchdog.Text = "1"
             End If
             ' set in object so plc will get it.
             If Not BgTaskData Is Nothing Then
-                BgTaskData.ADSWatchdogMs = CInt(TextBox_ADSWatchdog.Text)  ' TODO: Input Validation
+                BgTaskData.ADSWatchdogMs = value
             End If
             My.Settings.sADSWatchdog = TextBox_ADSWatchdog.Text
             My.Settings.Save()
@@ -738,12 +765,20 @@ Public Class Form1
 
     Private Sub TextBox_ADSWatchdogDeadDuration_TextChanged(sender As Object, e As EventArgs) Handles TextBox_ADSWatchdogDeadDuration.TextChanged
         If TextBox_ADSWatchdogDeadDuration.Text <> "" Then
-            If CInt(TextBox_ADSWatchdogDeadDuration.Text) < 1 Then
+            Dim value As Integer
+            Try
+                value = Int32.Parse(TextBox_ADSWatchdogDeadDuration.Text)
+            Catch ex As Exception
+                MessageBox.Show("Didn't understand the value you put in, it must be an integer. Setting a default value.")
+                TextBox_ADSWatchdogDeadDuration.Text = "2000"
+                value = 2000
+            End Try
+            If value < 1 Then
                 TextBox_ADSWatchdogDeadDuration.Text = "1"
             End If
             ' set in object so plc will get it.
             If Not BgTaskData Is Nothing Then
-                BgTaskData.ADSWatchdogDeadDurationMS = CInt(TextBox_ADSWatchdogDeadDuration.Text)   ' TODO: Input Validation
+                BgTaskData.ADSWatchdogDeadDurationMS = value
             End If
             My.Settings.sADSWatchdogDeadDuration = TextBox_ADSWatchdogDeadDuration.Text
             My.Settings.Save()
@@ -751,19 +786,41 @@ Public Class Form1
     End Sub
 
     Private Sub TextBox_AnalogDeadzone_TextChanged(sender As Object, e As EventArgs) Handles TextBox_AnalogDeadzone.TextChanged
-        If CInt(TextBox_AnalogDeadzone.Text) < 0 Then
-            TextBox_AnalogDeadzone.Text = "0"
+        If TextBox_AnalogDeadzone.Text <> "" Then
+            Dim value As Integer
+            Try
+                value = Int32.Parse(TextBox_AnalogDeadzone.Text)
+            Catch ex As Exception
+                MessageBox.Show("Didn't understand the value you put in, it must be an integer. Setting a default value.")
+                TextBox_AnalogDeadzone.Text = "6000"
+                value = 6000
+            End Try
+            If value < 0 Then
+                TextBox_AnalogDeadzone.Text = "6000"
+            End If
+            My.Settings.sAnalogDeadZone = TextBox_AnalogDeadzone.Text
+            My.Settings.Save()
         End If
-        My.Settings.sAnalogDeadZone = TextBox_AnalogDeadzone.Text
-        My.Settings.Save()
+
     End Sub
 
     Private Sub TextBox_ShoulderDeadzone_TextChanged(sender As Object, e As EventArgs) Handles TextBox_ShoulderDeadzone.TextChanged
-        If CInt(TextBox_ShoulderDeadzone.Text) < 0 Then
-            TextBox_ShoulderDeadzone.Text = "0"
+        If TextBox_ShoulderDeadzone.Text <> "" Then
+            Dim value As Integer
+            Try
+                value = Int32.Parse(TextBox_ShoulderDeadzone.Text)
+            Catch ex As Exception
+                MessageBox.Show("Didn't understand the value you put in, it must be an integer. Setting a default value.")
+                TextBox_ShoulderDeadzone.Text = "0"
+                value = 0
+            End Try
+            If value < 0 Then
+                TextBox_ShoulderDeadzone.Text = "0"
+            End If
+            My.Settings.sShoulderDeadZone = TextBox_ShoulderDeadzone.Text
+            My.Settings.Save()
         End If
-        My.Settings.sShoulderDeadZone = TextBox_ShoulderDeadzone.Text
-        My.Settings.Save()
+
     End Sub
 
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
