@@ -14,15 +14,16 @@ TcJoy is a free program that connects a USB (Wired and Wireless) Xbox 360 contro
 The hardware tested is as follows:
 
 https://amzn.to/2CBotpW - Wireless USB PC Adapter
+
 https://amzn.to/2RnXXJ2 - Black Xbox 360 Controller
 
 or as a bundle:
 
-https://amzn.to/2Snv0d8 - Wireless Controller + Single USB   (untested, but should work)
+https://amzn.to/2Snv0d8 - Wireless Controller + Single USB (untested, but should work)
 
 Or wired:
 
-https://amzn.to/2RgCOAo - Wired controller + Cable  (untested, but should work)
+https://amzn.to/2RgCOAo - Wired controller + Cable
 
 ## How it works
 
