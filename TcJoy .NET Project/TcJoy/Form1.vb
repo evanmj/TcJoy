@@ -13,7 +13,6 @@ Imports System
 ' TODO: Fix help tab, add help text/btns on plc settings
 ' TODO: Add donate link and possibly 'nag' screen
 ' TODO: Make howto video
-' TODO: Major data validation on all entry fields.
 ' 
 '
 ' MIT License
@@ -633,7 +632,7 @@ Public Class Form1
                                   TextBox_ADSNetID.Text, port)
 
             Try
-                BgTaskData.ADS_Connection = New Ads_Link(BgTaskData.NetID, BgTaskData.Port) ' Connect to local twincat. (todo)
+                BgTaskData.ADS_Connection = New Ads_Link(BgTaskData.NetID, BgTaskData.Port) ' Connect to local twincat. 
             Catch Ex As System.Exception
                 Console.WriteLine("StartPoller():" + Ex.Message)
             End Try
