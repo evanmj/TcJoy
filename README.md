@@ -7,7 +7,7 @@ TcJoy is a free program that connects a USB (Wired and Wireless) Xbox 360 contro
 
 ## Overview
 
-[flowchart] todo
+![flowchart](https://github.com/evanmj/TcJoy/blob/master/Screenshots/Flowchart.png)
 
 ## Hardware
 
