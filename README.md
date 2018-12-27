@@ -135,7 +135,7 @@ END_IF
 
 Here is a video from my Motion Control with PLCs video series where I use the previously closed source version of TcJoy:
 
-[![Video](https://img.youtube.com/vi/mXQ1IAxP74w/3.jpg)](https://youtu.be/mXQ1IAxP74w?t=394)
+[![Video](https://img.youtube.com/vi/mXQ1IAxP74w/0.jpg)](https://youtu.be/mXQ1IAxP74w?t=394)
 
 
 
