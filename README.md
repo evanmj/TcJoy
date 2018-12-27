@@ -53,6 +53,15 @@ Optionally, you can test with a complete "bare bones" Twincat project here:
 
 https://github.com/evanmj/TcJoy/tree/master/TcJoy%20TwinCAT%20Project
 
+The basic steps are:
+
+- Acquire TcJoy PC App
+- Make instance of FB_TcJoy in your PLC program, and call the function block every PLC scan.
+- Set appropriate settings
+- Connect Xbox Controller
+- Use the connect button to connect, then go to the "Usage" section below to use your new PLC variables.
+
+
 ## Settings
 
 There are various settings to configure the TcJoy runtime.  
