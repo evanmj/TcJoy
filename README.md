@@ -105,14 +105,16 @@ Test the controller here and make sure things work as expected, and compare with
 
 On the PLC, you'll end up with these output variables from the Function Block once everything is connected up and working:
 
+(In the screenshot, I'm holding the A button and the right shoulder trigger)
+
 ![image](https://github.com/evanmj/TcJoy/blob/master/Screenshots/PLC_Fb.png)
 
 Most are pretty obvious, buttons are booleans, analogs are DINTs.  
 
 The two "non buttons" worth noting are:
 
-bIsActive - Set true when TcJoy is communicating properly, goes false if anything goes wrong or a watchdog timeout occurs.
-bControllerConnected - Set true if TcJoy is communicating with the PLC runtime, and there is a controller connected.
+**bIsActive** - Set true when TcJoy is communicating properly, goes false if anything goes wrong or a watchdog timeout occurs.
+**bControllerConnected** - Set true if TcJoy is communicating with the PLC runtime, and there is a controller connected.
 
 A typical "end user" structured text program will look something like this:
 
@@ -131,7 +133,7 @@ END_IF
 
 ## Support / Troubleshooting
 
-Please open a ticket if you have issues... this has not been tested that much as of yet.
+Please open a ticket if you have issues... this has not been tested that much as of yet, especially on TC2 and WinCE.
 
 As usual, the best bug reports are in the form of a pull request!
 
