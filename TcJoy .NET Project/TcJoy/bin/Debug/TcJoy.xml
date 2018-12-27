@@ -1,0 +1,57 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+TcJoy
+</name>
+</assembly>
+<members>
+<member name="T:TcJoy.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:TcJoy.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:TcJoy.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:TcJoy.Ads_Link">
+ <summary>
+ ADS wrapper for attaching various ADS data types to .NET controls.
+ Jensen Mechatronics, LLC 2018
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:TcJoy.Form1.Timer_HealthCheck_Tick_Slow(System.Object,System.EventArgs)">
+ <summary>
+ System Health Check Slow Rate... Updates the gui with values from the controller, etc.  Runs slower than ADS cycle to preserve resources.
+ </summary>
+ <param name="sender"></param>
+ <param name="e"></param>
+ <remarks>Ticks every 'My.Settings.iHeathCheckPulseMS_Slow' Milliseconds </remarks>
+</member>
+<member name="T:TcJoy.Form1.DataTag">
+ <summary>
+ Data Tag Object that we read/write to or from twincat via ADS
+ </summary>
+</member>
+<member name="M:TcJoy.PLC_IO_Polling.StartWorker">
+ <summary>
+ Start off the background worker, which will configure itself and then run.
+ </summary>
+</member>
+<member name="M:TcJoy.PLC_IO_Polling.BackgroundWorker1_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+ <summary>
+ Start up the IO poller for the Twincat ADS data
+ </summary>
+ <remarks></remarks>
+</member>
+</members>
+</doc>
