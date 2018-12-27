@@ -1,4 +1,5 @@
 # TcJoy
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8YQRPBYQVAJ36&source=url)
 
 ## Summary
 
@@ -137,7 +138,9 @@ Please open a ticket if you have issues... this has not been tested that much as
 
 As usual, the best bug reports are in the form of a pull request!
 
+If you find this program useful, please consider a small donation to my children's college fund:
 
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8YQRPBYQVAJ36&source=url)
 
 
 
